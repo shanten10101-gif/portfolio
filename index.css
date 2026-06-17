@@ -300,7 +300,7 @@ header {
 }
 .img-slide.active { opacity: 1; }
 .slide-profile  { 
-  background: url(../images/profile2.png) no-repeat 50% 50%; 
+  background: url(./images/profile2.png) no-repeat 50% 50%; 
   bottom: 0;
 }
 .slide-education  { background: #c8c8c8; }
