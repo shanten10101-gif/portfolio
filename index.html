@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+        <!-- emailJS cdn -->
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+        <!-- css -->
+          <link rel="stylesheet" href="../css/reset.css">
+          <link rel="stylesheet" href="../css/style.css">
+          <link rel="stylesheet" href="../css/index.css">
+
+          <!-- script -->
+          <script src="./js/index.js"></script>
+  </head>
+  <body>
+
+      <!-- 고정 그리드 (project 섹션 뒤에 깔림) -->
+      <div class="grid-bg"></div>
+
+      <!-- ══════════════════════════
+          HEADER
+      ══════════════════════════ -->
+          <header>
+              <div class="portfolio">
+                  <div class="contents_title_wrap">
+                      <p class="contents_title">PORTFOLIO</p>
+                  </div>
+              </div>
+          </header>
+
+      <!-- ══════════════════════════
+          SEC 01 · HERO
+      ══════════════════════════ -->
+    <section_01>
+                <div class="main_hero">
+                      <div class="main_hero_img">
+                        <canvas id="bouncingCanvas"></canvas>
+                      </div>
+                        <p class="main_hero_title">
+                            Hello, World!
+                        </p>
+                    <nav class="center_gnb">
+
+                        <div class="gnb_logo">
+                            <div class="gnb_logo_img_01"></div>
+                            <div class="gnb_logo_img_02"></div>
+                            <div class="gnb_logo_img_03"></div>
+                            <div class="gnb_logo_img_04"></div>
+                        </div>
+
+                        <ul>
+                            <li><a href="entrance.html">ENTRANCE</a></li>
+                            <li><a href="#project">PROJECT</a></li>
+                            <li><a href="#about">ABOUT</a></li>
+                        </ul>
+                    </nav><!-- center_gnb -->
+                    
+                    <div class="gnb_btn">
+                      <ul>
+                        <li class="gnb_btn_text"><a href="#contact">CONTACT    &#10132;</a></li>
+                      </ul>
+                    </div>
+                </div>
+            </section_01>
+
+      <!-- ══════════════════════════
+          SEC 02 · ABOUT ME
+      ══════════════════════════ -->
+      <section class="sec sec-about" id="about">
+        <div class="about-section">
+          <h1 class="about-title">ABOUT ME</h1>
+          <div class="about-body">
+
+            <div class="about-info">
+              <div class="about-name">
+                송주연
+                <div class="name-dots">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+                <span class="name-sub">1997.04.01</span>
+              </div>
+              <p class="about-roles">Web Designer, UX/UI Designer, Graphic Designer</p>
+              <p class="about-email">shanten10101@gmail.com</p>
+              <p class="about-edu">한양여대 시각미디어디자인과 졸업</p>
+            </div>
+
+            <nav class="about-nav">
+              <button class="active" data-target="profile">PROFILE</button>
+              <button data-target="experience">EXPERIENCE</button>
+              <button data-target="license">LICENSE</button>
+            </nav>
+
+            <div class="about-image-panel">
+              <div class="img-slide slide-profile active" id="slide-profile"></div>
+              <div class="img-slide slide-experience"     id="slide-experience">2019-2021   (주)후지와이드칼라 디자인팀, 주임<br> 2022-2023   (주)국제와이드칼라 디자인팀, 주임<br> 2025-2026   봄아카데미 KDT 웹디자인 UX/UI 부트캠프 수료</div>
+              <div class="img-slide slide-license" id="slide-license">(국가기술자격증)   컬러리스트 산업기사</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="skills-section">
+          <div class="skills-label">MY SKILLS</div>
+          <div class="skills-icons">
+            
+            <div class="skill-icon sk-ps">
+              <img src="/images/skill1.png" alt="">
+            </div>
+            <div class="skill-icon sk-ai">
+              <img src="/images/skill2.png" alt="">
+            </div>
+            <div class="skill-icon sk-id">
+              <img src="/images/skill3.png" alt="">
+            </div>
+            <div class="skill-icon sk-vscode">
+              <img src="/images/skill4.png" alt="">
+            </div>
+            <div class="skill-icon sk-html">
+              <img src="/images/skill5.png" alt="">
+            </div>
+            <div class="skill-icon sk-css">
+              <img src="/images/skill6.png" alt="">
+            </div>
+            <div class="skill-icon sk-js">
+              <img src="/images/skill7.png" alt="">
+            </div>
+            <div class="skill-icon sk-cinema">
+              <img src="/images/skill8.png" alt="">
+            </div>
+            <div class="skill-icon sk-other" title="Other">
+              <img src="/images/skill9.png" alt="">
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════
+          SEC 03 · PROJECT
+      ══════════════════════════ -->
+      <section class="sec sec-project" id="project">
+
+        <div class="project-header">
+          <h2 class="project-title">PROJECT</h2>
+          <p class="project-sub">[SELECT TO EXPLORE]</p>
+        </div>
+
+        <div class="canvas">
+
+          <div class="project-item" id="item-01">
+            <span class="num num-tr">02.</span>
+            <div class="thumb thumb-box">
+              <a href="website-section.html#airbnb"><img src="./images/project_img_1.png"></a>
+            </div>
+          </div>
+
+          <div class="project-item" id="item-02">
+            <span class="num num-tr">03.</span>
+            <div class="thumb thumb-box">
+              <a href="website-section.html#domingo"><img src="./images/project_img_2.png"></a>
+            </div>
+          </div>
+
+          <div class="project-item" id="item-03">
+            <span class="num num-tr">04.</span>
+            <div class="thumb thumb-box">
+              <img src="./images/project_img_3.png" alt="">
+            </div>
+          </div>
+
+          <div class="project-item" id="item-04">
+            <span class="num num-tl">01.</span>
+            <div class="thumb thumb-box">            
+              <img src="./images/project_img_6-resized.gif" alt="">
+            </div>
+          </div>
+
+          <div class="project-item" id="item-06">
+            <span class="num num-tl">07.</span>
+            <div class="thumb thumb-box">
+              <a href="website-section.html#lush"><img src="./images/project_img_5.png"></a>
+            </div>
+          </div>
+
+        <div class="project-item" id="item-07">
+            <span class="num num-tr">05.</span>
+            <div class="thumb thumb-box">
+              <img src="./images/project_img_7.png" alt="">
+            </div>
+          </div>
+          
+          <div class="project-item" id="item-08">
+            <span class="num num-tr">06.</span>
+            <div class="thumb thumb-box">
+              <img src="./images/code.gif" alt="">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="ticker-wrap">
+          <div class="ticker-track">
+            <span class="ticker-item">01. GO TO WORK</span>
+            <span class="ticker-item">02. AIRBNB WEBSITE DESIGN</span>
+            <span class="ticker-item">03. TEAM DOMINGO WEBSITE DESIGN</span>
+            <span class="ticker-item">04. CHIIKAWA X LG TWINS PROMOTION DESIGN</span>
+            <span class="ticker-item">05. POSTPARTUM CARE HELPER APPLICATION SERVICE</span>
+            <span class="ticker-item">06. COMPUTER!</span>
+            <span class="ticker-item">07. LUSH WEBSITE DESIGN</span>
+
+            <span class="ticker-item">01. GO TO WORK</span>
+            <span class="ticker-item">02. AIRBNB WEBSITE DESIGN</span>
+            <span class="ticker-item">03. TEAM DOMINGO WEBSITE DESIGN</span>
+            <span class="ticker-item">04. CHIIKAWA X LG TWINS PROMOTION DESIGN</span>
+            <span class="ticker-item">05. POSTPARTUM CARE HELPER APPLICATION SERVICE</span>
+            <span class="ticker-item">06. COMPUTER!</span>
+            <span class="ticker-item">07. LUSH WEBSITE DESIGN</span>
+
+
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════
+          SEC 04 · PROJECT menu
+      ══════════════════════════ -->
+        <!-- ── 네비게이션 ── -->
+    <section class="sec sec-project_menu">
+      <nav>
+        <a href="website-section.html" class="nav-item">
+          <span class="bg-fill"></span>
+          <span class="label">Website</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="#promotion" class="nav-item">
+          <span class="bg-fill"></span>
+          <span class="label">Promotion</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="#app" class="nav-item">
+          <span class="bg-fill"></span>
+          <span class="label">App</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="#graphic-design" class="nav-item">
+          <span class="bg-fill"></span>
+          <span class="label">Graphic Design</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="#unknown" class="nav-item">
+          <span class="bg-fill"></span>
+          <span class="label">?</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="#artworks" class="nav-item">
+          <span class="bg-fill"></span>
+          <span class="label">Artworks</span>
+          <span class="arrow">→</span>
+        </a>
+      </nav>
+    </section>     
+
+  <!-- ══════════════════════════
+          SEC 06 · CONTACT
+      ══════════════════════════ -->
+      <section class="sec sec-contact" id="contact">
+        <div class="contact-section">
+          <h2 class="contact-title">함께 작업해보고 싶으신가요? 🙂</h2>
+
+          <form id="contact-form" class="contact-box">
+              <div class="form-main-content">
+                  <!-- 왼쪽: 입력 필드 그룹 -->
+                  <div class="input-fields-group">
+                      <div class="form-align">
+                          <div class="input-box">
+                              <label for="company">회사명</label>
+                              <input type="text" id="company" name="company" required placeholder="company name">
+                          </div>
+                          <div class="input-box">
+                              <label for="name">이름</label>
+                              <input type="text" id="name" name="name" required placeholder="name">
+                          </div>
+                      </div>
+                      <div class="form-align">
+                          <div class="input-box">
+                              <label for="email">이메일</label>
+                              <input type="email" id="email" name="email" required placeholder="e-mail">
+                          </div>
+                          <div class="input-box">
+                              <label for="phone">연락처</label>
+                              <input type="text" id="phone" name="phone" required placeholder="phone number">
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- 오른쪽: 메시지 상자 -->
+                  <div class="message-box">
+                      <label for="message">문의 내용</label>
+                      <textarea name="message" id="message" placeholder="문의사항을 남겨주세요." required></textarea>
+                  </div>
+              </div>
+
+              <!-- 하단 영역: 거대 텍스트와 버튼 -->
+              <div class="form-footer">
+                  <h1 class="big-contact-text">CONTACT</h1>
+                  <div class="send-btn">
+                      <button type="submit">SEND MESSAGE ➔</button>
+                  </div>
+              </div>
+          </form>
+        </div>
+      </section>
+      
+  <script src="index.js"></script>
+  <script src="email.js"></script>
+
+  </body>
+</html>

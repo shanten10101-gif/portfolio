@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Section</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+
+    /* ══════════════════════════════════
+       RESET & BASE
+    ══════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #fff;
+      font-family: 'Paperlozy', 'Barlow', sans-serif;
+      color: #111;
+    }
+
+
+    /* ══════════════════════════════════
+       WEBSITE SECTION 전체 래퍼
+       320px → 1920px 전 구간 clamp 대응
+    ══════════════════════════════════ */
+    #website {
+      width: 100%;
+      /*
+        padding-top/bottom : 80px(320) → 300px(1920)
+        padding-left/right : 20px(320) → 200px(1920)
+
+        공식: clamp(min, preferred, max)
+        preferred = min + (max - min) * (100vw - 320px) / (1920px - 320px)
+        → 단순화: clamp(80px, calc(3.125vw + 70px), 300px)   (세로)
+                  clamp(20px, calc(11.25vw - 16px), 200px)   (가로)
+      */
+      padding:
+        clamp(80px,  calc(3.125vw + 70px),  300px)   /* top/bottom */
+        clamp(20px,  calc(11.25vw - 16px),  200px);  /* left/right */
+    }
+
+    /* ══════════════════════════════════
+       개별 프로젝트 블록
+    ══════════════════════════════════ */
+    .project-item {
+      display: grid;
+      /*
+        info 열 너비: 200px(320) → 320px(1920)
+        clamp(200px, calc(7.5vw + 176px), 320px)
+      */
+      grid-template-columns: clamp(200px, calc(7.5vw + 176px), 320px) 1fr;
+      /*
+        gap: 24px(320) → 80px(1920)
+        clamp(24px, calc(3.5vw + 12.8px), 80px)
+      */
+      gap: 0 clamp(24px, calc(3.5vw + 12.8px), 80px);
+      align-items: start;
+      /*
+        margin-bottom: 60px(320) → 180px(1920)
+        clamp(60px, calc(7.5vw + 36px), 180px)
+      */
+      margin-bottom: clamp(60px, calc(7.5vw + 36px), 180px);
+    }
+    .project-item:last-child { margin-bottom: 0; }
+
+
+    /* ══════════════════════════════════
+       왼쪽: 텍스트 정보
+    ══════════════════════════════════ */
+    .project-info {
+      padding-top: 0;
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .project-info.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 제목
+       font-size: 18px(320) → 28px(1920)
+       clamp(18px, calc(0.625vw + 16px), 28px)
+    */
+    .project-title {
+      font-size: clamp(18px, calc(0.625vw + 16px), 28px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      padding-bottom: clamp(10px, calc(0.25vw + 9.2px), 14px);
+      margin-bottom: 0;
+      border-bottom: 1px solid #111;
+      text-align: right;
+    }
+    .proj-num {
+      margin-right: 6px;
+    }
+
+    /* 메타 테이블 */
+    .project-meta {
+      width: 100%;
+      margin-top: 0;
+    }
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      /*
+        padding: 6px(320) → 10px(1920)
+        clamp(6px, calc(0.25vw + 5.2px), 10px)
+      */
+      padding: clamp(6px, calc(0.25vw + 5.2px), 10px) 0;
+      border-bottom: 1px solid #ddd;
+      /*
+        font-size: 13px(320) → 18px(1920)
+        clamp(13px, calc(0.3125vw + 12px), 18px)
+      */
+      font-size: clamp(13px, calc(0.3125vw + 12px), 18px);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .meta-row:first-child {
+      justify-content: flex-end;
+      color: #111;
+    }
+    .meta-label { color: #111; }
+    .meta-value { color: #111; text-align: right; }
+
+
+    /* ══════════════════════════════════
+       오른쪽: 이미지 + 링크
+    ══════════════════════════════════ */
+    .project-thumb-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      opacity: 0;
+      transform: translateY(64px);
+      transition:
+        opacity   0.85s ease                              0.12s,
+        transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)  0.12s;
+    }
+    .project-thumb-wrap.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* ══════════════════════════════════
+       이미지 박스 — hover 오버레이 포함
+    ══════════════════════════════════ */
+    .thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0);
+      transition: background 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* VIEW MORE 버튼
+       font-size : 14px(320) → 20px(1920)
+       padding   : 10px 20px(320) → 13px 32px(1920)
+    */
+    .thumb-btn {
+      display: inline-block;
+      padding:
+        clamp(10px, calc(0.1875vw + 9.4px), 13px)
+        clamp(20px, calc(0.75vw + 17.6px),  32px);
+      border: 1.5px solid #fff;
+      border-radius: 999px;
+      color: #fff;
+      font-family: 'Paperlozy', 'Barlow', sans-serif;
+      font-size: clamp(14px, calc(0.375vw + 12.8px), 20px);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(10px) scale(0.96);
+      transition:
+        opacity   0.35s ease         0.05s,
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.05s,
+        background 0.2s ease;
+    }
+    .thumb-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .thumb:hover img {
+      transform: scale(1.04);
+    }
+    .thumb:hover .thumb-overlay {
+      background: rgba(0, 0, 0, 0.45);
+    }
+    .thumb:hover .thumb-btn {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* 터치 디바이스: hover 대신 항상 오버레이 표시 */
+    @media (hover: none) {
+      .thumb-overlay {
+        background: rgba(0, 0, 0, 0.35);
+      }
+      .thumb-btn {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+
+    /* ══════════════════════════════════
+       GO-BTN
+       font-size : 14px(320) → 20px(1920)
+    ══════════════════════════════════ */
+    #go-btn {
+      display: block;
+      position: fixed;
+      bottom: clamp(20px, calc(1.25vw + 16px), 40px);
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      padding:
+        clamp(10px, calc(0.25vw + 9.2px), 14px)
+        clamp(20px, calc(1vw + 16.8px),   36px);
+      background: #111;
+      color: #fff;
+      border-radius: 999px;
+      border: 1px solid #fff;
+      font-size: clamp(14px, calc(0.375vw + 12.8px), 20px);
+      font-weight: 500;
+      font-family: 'Paperlozy', 'Barlow', sans-serif;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s;
+      z-index: 999;
+    }
+    #go-btn.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+    #go-btn:hover {
+      background: #333;
+    }
+
+
+    /* ══════════════════════════════════
+       BREAKPOINTS
+       clamp 만으로 커버하기 어려운 레이아웃
+       구조 변경은 미디어쿼리로 보완
+    ══════════════════════════════════ */
+
+    /* 태블릿 ~ 작은 데스크탑 (600px ~ 900px) */
+    @media (max-width: 900px) {
+      .project-item {
+        grid-template-columns: 1fr;
+        gap: clamp(20px, 4vw, 40px) 0;
+      }
+      /* 모바일에서 제목 왼쪽 정렬 */
+      .project-title {
+        text-align: left;
+      }
+    }
+
+    /* 모바일 소형 (320px ~ 480px) */
+    @media (max-width: 480px) {
+      .project-item {
+        margin-bottom: clamp(48px, 12vw, 80px);
+      }
+      /* meta-row 줄 바꿈 허용 */
+      .meta-row {
+        flex-wrap: wrap;
+        gap: 2px 8px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <section id="website">
+
+    <!-- 프로젝트 01 -->
+    <div class="project-item" id="airbnb">
+      <div class="project-info">
+        <h2 class="project-title">
+          <span class="proj-num">01.</span> Airbnb Web Project
+        </h2>
+        <div class="project-meta">
+          <div class="meta-row">
+            <span class="meta-value">Web (Static) / 1920 × 1080</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Grid</span>
+            <span class="meta-value">12 Columns</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Margins</span>
+            <span class="meta-value">140 px</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Gutters</span>
+            <span class="meta-value">40 px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-thumb-wrap">
+        <div class="thumb">
+          <img src="./images/airbnb_hero_img 1.png" alt="Airbnb Website Project" />
+          <div class="thumb-overlay">
+            <a href="#" class="thumb-btn" target="_blank">VIEW MORE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 프로젝트 02 -->
+    <div class="project-item" id="lush">
+      <div class="project-info">
+        <h2 class="project-title">
+          <span class="proj-num">02.</span> LUSH Web Project
+        </h2>
+        <div class="project-meta">
+          <div class="meta-row">
+            <span class="meta-value">Web (Responsive) / 1920 × 1080</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Grid</span>
+            <span class="meta-value">12 Columns</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Margins</span>
+            <span class="meta-value">140 px</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Gutters</span>
+            <span class="meta-value">40 px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-thumb-wrap">
+        <div class="thumb">
+          <img src="./images/lush_hero_img 1.jpg" alt="LUSH Website Project" />
+          <div class="thumb-overlay">
+            <a href="#" class="thumb-btn" target="_blank">VIEW MORE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 프로젝트 03 -->
+    <div class="project-item" id="domingo">
+      <div class="project-info">
+        <h2 class="project-title">
+          <span class="proj-num">03.</span> Team Domingo<br> Web project
+        </h2>
+        <div class="project-meta">
+          <div class="meta-row">
+            <span class="meta-value">Web (Responsive) / 1920 × 1080</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Grid</span>
+            <span class="meta-value">12 Columns</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Margins</span>
+            <span class="meta-value">140 px</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Gutters</span>
+            <span class="meta-value">40 px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-thumb-wrap">
+        <div class="thumb">
+          <img src="./images/teamdomingo_img.jpg" alt="Team Domingo Website Project" />
+          <div class="thumb-overlay">
+            <a href="#" class="thumb-btn" target="_blank">VIEW MORE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 프로젝트 추가 시 아래 블록을 복사하세요 -->
+    <!--
+    <div class="project-item">
+      <div class="project-info">
+        <h2 class="project-title"><span class="proj-num">04.</span> 프로젝트명</h2>
+        <div class="project-meta">
+          <div class="meta-row"><span class="meta-value">Web / 1920 × 1080</span></div>
+          <div class="meta-row"><span class="meta-label">Grid</span><span class="meta-value">12 Columns</span></div>
+          <div class="meta-row"><span class="meta-label">Margins</span><span class="meta-value">140 px</span></div>
+          <div class="meta-row"><span class="meta-label">Gutters</span><span class="meta-value">40 px</span></div>
+        </div>
+      </div>
+      <div class="project-thumb-wrap">
+        <div class="thumb">
+          <img src="이미지경로.jpg" alt="프로젝트명" />
+          <div class="thumb-overlay">
+            <a href="#" class="thumb-btn" target="_blank">VIEW MORE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
+
+  </section>
+
+  <a id="go-btn" href="index.html">BACK</a>
+
+
+  <script>
+    /* 1) 스크롤 Reveal */
+    (function () {
+      const revealEls = document.querySelectorAll('.project-info, .project-thumb-wrap');
+      if (!revealEls.length) return;
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      revealEls.forEach(function (el) { observer.observe(el); });
+    })();
+
+
+    /* 2) GO-BTN — 마지막 프로젝트 진입 시 표시 */
+    (function () {
+      const btn    = document.getElementById('go-btn');
+      const items  = document.querySelectorAll('.project-item');
+      const target = items[items.length - 1];
+
+      if (!btn || !target) return;
+
+      const btnObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          btn.classList.toggle('visible', entry.isIntersecting);
+        });
+      }, { threshold: 0.3 });
+
+      btnObserver.observe(target);
+    })();
+  </script>
+
+</body>
+</html>

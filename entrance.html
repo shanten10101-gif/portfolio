@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/function.js"></script>
+
+    <style>
+      header {
+        position: relative;
+      }
+
+      #go-btn {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%) translateY(8px);
+        padding: 14px 36px;
+        background: #111;
+        color: #fff;
+        border-radius: 999px; border: 1px solid #fff;
+        font-size: 18px;
+        letter-spacing: 0.5px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s;
+      }
+
+      #go-btn.visible {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+      }
+
+      #go-btn:hover {
+        background: #333;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="hero-3d">
+        <model-viewer src="3d/office_props_pack.glb" alt="3D 모델" auto-rotate camera-controls></model-viewer>
+      </div>
+
+      <a id="go-btn" href="index.html">
+        CLICK TO ENTER
+      </a>
+    </header>
+
+    <script>
+      setTimeout(() => {
+        document.getElementById('go-btn').classList.add('visible');
+      }, 3000);
+    </script>
+  </body>
+</html>
